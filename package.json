@@ -1,0 +1,16 @@
+{
+  "name": "wow-tracker-server",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "koa": "^2.13.1",
+    "nodemon": "^2.0.7"
+  }
+}
