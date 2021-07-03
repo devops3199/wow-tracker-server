@@ -1,6 +1,11 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import api from './api/index.js';
+import dotenv from 'dotenv';
+
+if(process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 const app = new Koa();
 const router = new Router();
