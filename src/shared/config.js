@@ -1,14 +1,13 @@
-import passport from 'passport';
+import passport from 'koa-passport';
 import BnetStrategy from 'passport-bnet';
-
-console.log(process.env.WOW_BNET_ID, 'id');
-console.log(process.env.WOW_BNET_SECRET, 'secret');
+import dotenv from 'dotenv';
+dotenv.config({ path: ".env" });
 
 const oAuth = passport.use(new BnetStrategy({
     clientID: process.env.WOW_BNET_ID,
     clientSecret: process.env.WOW_BNET_SECRET,
     callbackURL: "https://localhost:4000/api/auth/callback",
-    region: "us"
+    region: "kr"
 }, function(accessToken, refreshToken, profile, done) {
     console.log(accessToken, refreshToken, profile, 'Success');
     return done(null, profile);

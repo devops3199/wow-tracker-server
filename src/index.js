@@ -1,17 +1,16 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import passport from 'koa-passport';
 import api from './api/index.js';
-import dotenv from 'dotenv';
-
-if(process.env.NODE_ENV !== 'production') {
-    dotenv.config();
-}
+import oAuth from './shared/config.js';
 
 const app = new Koa();
 const router = new Router();
 
 router.use('/api', api.routes());
 
-app.use(router.routes()).use(router.allowedMethods());
+app.use(passport.initialize()).use(router.routes()).use(router.allowedMethods());
+
+oAuth;
 
 app.listen(4000, () => console.log('4000 Port Server Running'));

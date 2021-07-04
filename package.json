@@ -5,17 +5,17 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
-    "start:dev": "nodemon src/index.js"
+    "start": "set NODE_ENV=production && nodemon --watch src src/index.js",
+    "start:dev": "set NODE_ENV=development && nodemon --watch src src/index.js"
   },
-  "author": "",
+  "author": "Chanyeop Jeong",
   "license": "ISC",
   "devDependencies": {
     "dotenv": "^10.0.0",
     "koa": "^2.13.1",
+    "koa-passport": "^4.1.4",
     "koa-router": "^10.0.0",
     "nodemon": "^2.0.7",
-    "passport": "^0.4.1",
     "passport-bnet": "^2.0.0"
   }
 }
