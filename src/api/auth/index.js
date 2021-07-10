@@ -5,11 +5,12 @@ const records = new Router();
 
 records.get('/', passport.authenticate('bnet'));
 
-records.get('/callback', async (ctx, next) => {
-    return passport.authenticate('bnet', { failureRedirect: '/api/records' }, async (err, profile, info) => {
+records.get('/callback', async (ctx) => {
+    passport.authenticate('bnet', { session: false,  failureRedirect: '/' }, async (err, profile, info) => {
         console.log(profile, 'profile');
-        ctx.redirect('/');
     })(ctx);
+
+    ctx.redirect('/');
 });
 
 export default records;
