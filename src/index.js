@@ -1,8 +1,8 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import passport from 'koa-passport';
-import api from './api/index.js';
-import oAuth from './shared/config.js';
+import api from './api/routes/index.js';
+import { oAuth } from './shared/config.js';
 
 const app = new Koa();
 const router = new Router();

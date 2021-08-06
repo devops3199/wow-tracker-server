@@ -12,4 +12,12 @@ const oAuth = passport.use(new BnetStrategy({
     return done(null, profile);
 }));
 
-export default oAuth;
+const dbConnection = {
+    host: process.env.WOW_DB_HOST,
+    port: Number(process.env.WOW_DB_PORT),
+    user: process.env.WOW_DB_USER,
+    password: process.env.WOW_DB_PASSWORD,
+    database: process.env.WOW_DB_DATABASE
+};
+
+export { oAuth, dbConnection };

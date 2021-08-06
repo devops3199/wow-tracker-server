@@ -17,5 +17,8 @@
     "koa-router": "^10.0.0",
     "nodemon": "^2.0.7",
     "passport-bnet": "^2.0.0"
+  },
+  "dependencies": {
+    "mysql": "^2.18.1"
   }
 }
