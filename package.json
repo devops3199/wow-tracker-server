@@ -5,8 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=production && nodemon --watch src src/index.js",
-    "start:dev": "set NODE_ENV=development && nodemon --watch src src/index.js"
+    "start": "set NODE_ENV=production && nodemon -r dotenv/config --watch src src/index.js",
+    "start:dev": "set NODE_ENV=development && nodemon -r dotenv/config --watch src src/index.js"
   },
   "author": "Chanyeop Jeong",
   "license": "ISC",

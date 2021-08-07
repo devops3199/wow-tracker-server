@@ -1,7 +1,5 @@
 import passport from 'koa-passport';
 import BnetStrategy from 'passport-bnet';
-import dotenv from 'dotenv';
-dotenv.config({ path: ".env" });
 
 const oAuth = passport.use(new BnetStrategy({
     clientID: process.env.WOW_BNET_ID,

@@ -1,11 +1,11 @@
 import Router from 'koa-router';
 import passport from 'koa-passport';
 
-const records = new Router();
+const auth = new Router();
 
-records.get('/', passport.authenticate('bnet'));
+auth.get('/', passport.authenticate('bnet'));
 
-records.get('/callback', async (ctx) => {
+auth.get('/callback', async (ctx) => {
     passport.authenticate('bnet', { session: false,  failureRedirect: '/' }, async (err, profile, info) => {
         console.log(profile, 'profile');
     })(ctx);
@@ -13,4 +13,4 @@ records.get('/callback', async (ctx) => {
     ctx.redirect('/');
 });
 
-export default records;
+export default auth;
