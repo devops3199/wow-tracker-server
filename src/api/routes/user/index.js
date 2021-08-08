@@ -6,7 +6,7 @@ const user = new Router();
 user.get('/:userId', async (ctx, next) => {
     const id = Number(ctx.params.userId);
     const userRepository = new UserRepository();
-    const result = userRepository.findById(id);
+    const result = await userRepository.findById(id);
     console.log(result);
     ctx.body = result;
 });

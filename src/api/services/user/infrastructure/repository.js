@@ -12,9 +12,9 @@ export class UserRepository {
     async findById(id) {
         const connection = mysql.createConnection(dbConnection);
         
-        const getUser = () => {
+        const getUser = (useId) => {
             return new Promise((resolve, reject) => {
-                connection.query(`SELECT email, name, password, joinDate FROM user WHERE id = ${id}`, (error, results, fields) => {
+                connection.query(`SELECT email, name, password, joinDate FROM user WHERE id = ${useId}`, (error, results, fields) => {
                     if (error) {
                         reject(new Error('Request Query Error - get a user'));
                     }
@@ -23,8 +23,10 @@ export class UserRepository {
             })
         }
 
+        const result = await getUser(id);
+
         connection.end();
 
-        return undefined;
+        return result;
     }
 }
