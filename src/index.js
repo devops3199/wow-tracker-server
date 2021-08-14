@@ -3,9 +3,6 @@ import Router from 'koa-router';
 import passport from 'koa-passport';
 import api from './api/routes/index.js';
 
-import dotenv from 'dotenv';
-dotenv.config({ path: ".env" });
-
 const app = new Koa();
 const router = new Router();
 

@@ -14,7 +14,7 @@ export class UserRepository {
         
         const getUser = (useId) => {
             return new Promise((resolve, reject) => {
-                connection.query(`SELECT email, name, password, joinDate FROM user WHERE id = ${useId}`, (error, results, fields) => {
+                connection.query(`SELECT email, name, password, createdAt FROM user WHERE id = ${useId}`, (error, results, fields) => {
                     if (error) {
                         reject(new Error('Request Query Error - get a user'));
                     }
@@ -27,6 +27,25 @@ export class UserRepository {
 
         connection.end();
 
-        return result;
+        return result.length > 0 ? result[0] : ['No Result'];
+    }
+
+    async save(user) {
+        const connection = mysql.createConnection(dbConnection);
+
+        const saveUser = (user) => {
+            return new Promise((resolve, reject) => {
+                connection.query(`INSERT INTO user (email, name, password, createdAt) VALUES (${user.email}, ${user.name}, ${user.password}, now())`, (error, results, fields) => {
+                    if (error) {
+                        reject(new Error('Request Query Error - save a user'));
+                    }
+                    resolve();
+                });
+            });
+        }
+
+        await saveUser(user);
+
+        connection.end();
     }
 }
