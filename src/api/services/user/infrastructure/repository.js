@@ -1,12 +1,5 @@
 import mysql from 'mysql';
-
-const dbConnection = {
-    host: process.env.WOW_DB_HOST,
-    port: Number(process.env.WOW_DB_PORT),
-    user: process.env.WOW_DB_USER,
-    password: process.env.WOW_DB_PASSWORD,
-    database: process.env.WOW_DB_DATABASE
-};
+import { dbConnection } from '../../../../shared/config';
 
 export class UserRepository {
     async findById(id) {
@@ -35,7 +28,7 @@ export class UserRepository {
         
         const getUser = (email) => {
             return new Promise((resolve, reject) => {
-                connection.query(`SELECT email, password FROM user WHERE email = ${email}`, (error, results, fields) => {
+                connection.query(`SELECT password FROM user WHERE email = ${email}`, (error, results, fields) => {
                     if (error) {
                         reject(new Error('Request Query Error - get a user'));
                     }
