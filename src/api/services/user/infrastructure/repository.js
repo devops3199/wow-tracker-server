@@ -37,7 +37,7 @@ export class UserRepository {
             })
         }
 
-        const result = await getUser(id);
+        const result = await getUser(email);
 
         connection.end();
 
