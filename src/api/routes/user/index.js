@@ -7,8 +7,9 @@ const user = new Router();
 
 user.get('/:userId', async (ctx, next) => {
     const id = Number(ctx.params.userId);
-    const userRepository = new UserRepository();
-    const result = await userRepository.findById(id);
+    // const userRepository = new UserRepository();
+    // const result = await userRepository.findById(id);
+    // Service로 대채
     ctx.body = result;
 });
 
