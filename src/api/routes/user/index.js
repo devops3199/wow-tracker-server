@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import { UserRepository } from '../../services/user/infrastructure/repository.js';
+import { UserService } from '../../services/user/application/service.js';
 import { User } from '../../services/user/domain/model.js';
 import passwordHash from 'password-hash';
  
@@ -14,12 +14,16 @@ user.get('/:userId', async (ctx, next) => {
 
 user.post('/', async (ctx, next) => {
     const password = passwordHash.generate(ctx.request.body.password);
+
     const user = new User({
         email: ctx.request.body.email,
         name: ctx.request.body.name,
         password: password,
     });
-    console.log(user)
+    
+    const service = new UserService();
+
+    await service.register(user);
 });
 
 export default user;
