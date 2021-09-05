@@ -5,8 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=production && nodemon -r dotenv/config --watch src src/index.js",
-    "start:dev": "set NODE_ENV=development && nodemon -r dotenv/config --watch src src/index.js"
+    "start": "set NODE_ENV=production && nodemon -r dotenv/config --watch src src/index.js"
   },
   "author": "Chanyeop Jeong",
   "license": "ISC",
@@ -19,6 +18,7 @@
     "passport-bnet": "^2.0.0"
   },
   "dependencies": {
+    "koa-bodyparser": "^4.3.0",
     "mysql": "^2.18.1",
     "password-hash": "^1.2.2"
   }

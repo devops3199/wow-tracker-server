@@ -5,12 +5,22 @@ export class UserService {
     async register(user) {
         const repository = new UserRepository();
 
-        const user = new User({
+        const model = new User({
             email: user.email,
             name: user.name,
             password: user.password
         });
 
-        await repository.save([user]);
+        await repository.save([model]);
+    }
+
+    async getUser(id) {
+        const repository = new UserRepository();
+        return await repository.findById(id);
+    }
+
+    async getEmail(email) {
+        const repository = new UserRepository();
+        return await repository.findByEmail(email);
     }
 }

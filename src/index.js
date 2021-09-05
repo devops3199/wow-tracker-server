@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
 import api from './api/routes/index.js';
 
@@ -8,6 +9,6 @@ const router = new Router();
 
 router.use('/api', api.routes());
 
-app.use(passport.initialize()).use(router.routes()).use(router.allowedMethods());
+app.use(bodyParser()).use(passport.initialize()).use(router.routes()).use(router.allowedMethods());
 
 app.listen(4000, () => console.log('4000 Port Server Running'));

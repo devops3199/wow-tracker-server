@@ -1,5 +1,5 @@
 import mysql from 'mysql';
-import { dbConnection } from '../../../../shared/config';
+import { dbConnection } from '../../../../shared/config.js';
 
 export class playRepository {
     async findAll() {
