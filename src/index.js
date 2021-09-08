@@ -9,6 +9,10 @@ const router = new Router();
 
 router.use('/api', api.routes());
 
+router.get('/ping', (ctx) => {
+    ctx.body = 'pong';
+});
+
 app.use(bodyParser()).use(passport.initialize()).use(router.routes()).use(router.allowedMethods());
 
 app.listen(4000, () => console.log('4000 Port Server Running'));
