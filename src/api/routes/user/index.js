@@ -5,7 +5,7 @@ import passwordHash from 'password-hash';
  
 const user = new Router();
 
-user.get('/:userId', async (ctx, next) => {
+user.get('/:userId', async (ctx) => {
     const id = Number(ctx.params.userId);
     
     const service = new UserService();
@@ -13,7 +13,7 @@ user.get('/:userId', async (ctx, next) => {
     ctx.body = await service.getUser(id);
 });
 
-user.post('/', async (ctx, next) => {
+user.post('/', async (ctx) => {
     const password = passwordHash.generate(ctx.request.body.password);
 
     const user = new User({
