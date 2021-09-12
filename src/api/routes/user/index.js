@@ -27,4 +27,18 @@ user.post('/', async (ctx) => {
     await service.register(user);
 });
 
+user.post('/login', async (ctx) => {
+    const password = passwordHash.generate(ctx.request.body.password);
+
+    const user = new User({
+        email: ctx.request.body.email,
+        name: '',
+        password: password,
+    });
+    
+    const service = new UserService();
+
+    ctx.body = await service.login(user);
+});
+
 export default user;

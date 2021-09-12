@@ -22,4 +22,25 @@ export class AuthRepository {
 
         return result.length > 0 ? result[0] : ['No Result'];
     }
+
+    async getToken(user) {
+        const connection = mysql.createConnection(dbConnection);
+        
+        const token = (user) => {
+            return new Promise((resolve, reject) => {
+                connection.query(`SELECT 1 FROM user WHERE email = ${user.email} AND password = ${user.password}`, (error, results, fields) => {
+                    if (error) {
+                        reject(new Error('Request Query Error - login'));
+                    }
+                    resolve(results);
+                });
+            })
+        }
+
+        const result = await token(user);
+
+        connection.end();
+
+        return result;
+    }
 }
