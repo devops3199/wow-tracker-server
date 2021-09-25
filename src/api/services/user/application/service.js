@@ -1,5 +1,5 @@
 import { UserRepository } from '../infrastructure/repository.js';
-import { AuthReposiotry } from '../../auth/infrastructure/repository.js';
+import { AuthRepository } from '../../auth/infrastructure/repository.js';
 
 export class UserService {
     async register(user) {
@@ -13,12 +13,12 @@ export class UserService {
     }
 
     async getEmail(email) {
-        const repository = new AuthReposiotry();
+        const repository = new AuthRepository();
         return await repository.findByEmail(email);
     }
 
     async login(user) {
-        const repository = new AuthReposiotry();
+        const repository = new AuthRepository();
         const result = await repository.getToken(user);
 
         // Generate Tokens
