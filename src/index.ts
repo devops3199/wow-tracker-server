@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
-import api from './api/routes/index.js';
+import api from './api/routes/index';
 
 const app = new Koa();
 const router = new Router();
