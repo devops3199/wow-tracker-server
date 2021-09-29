@@ -6,10 +6,10 @@ const auth = new Router();
 
 auth.get('/', passport.authenticate('bnet'));
 
-auth.get('/callback', async (ctx) => {
+auth.get('/callback', async (ctx, next) => {
     passport.authenticate('bnet', { session: false,  failureRedirect: '/' }, async (err, profile, info) => {
         console.log(profile, 'profile');
-    })(ctx);
+    })(ctx, next);
 
     ctx.redirect('/');
 });
