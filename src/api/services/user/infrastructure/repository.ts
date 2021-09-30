@@ -1,5 +1,6 @@
 import mysql from 'mysql';
-import { dbConnection } from '../../../../shared/config.js';
+import { User } from '../domain/model';
+import { dbConnection } from '../../../../shared/config';
 
 export class UserRepository {
     async findById(id: number) {
@@ -23,10 +24,10 @@ export class UserRepository {
         return result.length > 0 ? result[0] : ['No Result'];
     }
 
-    async save(user) {
+    async save(user: User[]) {
         const connection = mysql.createConnection(dbConnection);
 
-        const saveUser = (user): Promise<void> => {
+        const saveUser = (user: User): Promise<void> => {
             return new Promise((resolve, reject) => {
                 connection.query(`INSERT INTO user (email, name, password, createdAt) VALUES ('${user.email}', '${user.name}', '${user.password}', now())`, (error, results, fields) => {
                     if (error) {
