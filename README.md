@@ -8,4 +8,5 @@
 </p>
 
 ### :timer_clock: 개발기간
-+ 2021년 06월 ~ 현재
+
+- 2021년 06월 ~ 현재 (Domain Driven Design 적용 중)
