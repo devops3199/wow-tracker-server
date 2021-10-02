@@ -1,11 +1,12 @@
 import mysql from 'mysql';
-import { dbConnection } from '../../../../shared/config.js';
+import { dbConnection } from '../../../../shared/config';
+import { User } from '../../user/domain/model';
 
 export class AuthRepository {
-    async findByEmail(email) {
+    async findByEmail(email: string) {
         const connection = mysql.createConnection(dbConnection);
         
-        const getUser = (email) => {
+        const getUser = (email: string): Promise<string[]> => {
             return new Promise((resolve, reject) => {
                 connection.query(`SELECT password FROM user WHERE email = ${email}`, (error, results, fields) => {
                     if (error) {
@@ -23,10 +24,11 @@ export class AuthRepository {
         return result.length > 0 ? result[0] : ['No Result'];
     }
 
-    async getToken(user) {
+    // NOTE: This logic should be refactored.
+    async getToken(user: User) {
         const connection = mysql.createConnection(dbConnection);
         
-        const token = (user) => {
+        const token = (user: User): Promise<string[]> => {
             return new Promise((resolve, reject) => {
                 connection.query(`SELECT 1 FROM user WHERE email = ${user.email} AND password = ${user.password}`, (error, results, fields) => {
                     if (error) {
@@ -41,6 +43,6 @@ export class AuthRepository {
 
         connection.end();
 
-        return result;
+        return result[0];
     }
 }

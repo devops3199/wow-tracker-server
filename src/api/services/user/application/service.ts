@@ -1,6 +1,7 @@
 import { UserRepository } from '../infrastructure/repository';
 import { AuthRepository } from '../../auth/infrastructure/repository';
 import { User } from '../domain/model';
+import jwt from 'jsonwebtoken';
 
 export class UserService {
     async register(user: User) {
@@ -23,6 +24,12 @@ export class UserService {
         const result = await repository.getToken(user);
 
         // Generate Tokens
+        if (result === '1') {
+            return jwt.sign({
+                email: user.email,
+                name: user.name
+            }, 'trackertower');
+        }
 
         return '';
     }
