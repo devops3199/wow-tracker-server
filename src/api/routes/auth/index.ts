@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import passport from 'koa-passport';
-import { AuthRepository } from '../../services/auth/infrastructure/repository.js';
+import { AuthRepository } from '../../services/auth/infrastructure/repository';
 
 const auth = new Router();
 

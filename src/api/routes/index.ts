@@ -1,7 +1,7 @@
 import Router from 'koa-router';
-import record from './record/index.js';
-import auth from './auth/index.js';
-import user from './user/index.js';
+import record from './record/index';
+import auth from './auth/index';
+import user from './user/index';
 
 const api = new Router();
 

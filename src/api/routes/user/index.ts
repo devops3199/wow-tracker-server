@@ -1,6 +1,6 @@
 import Router from 'koa-router';
-import { UserService } from '../../services/user/application/service.js';
-import { User } from '../../services/user/domain/model.js';
+import { UserService } from '../../services/user/application/service';
+import { User } from '../../services/user/domain/model';
 import passwordHash from 'password-hash';
  
 const user = new Router();
