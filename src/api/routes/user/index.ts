@@ -41,4 +41,18 @@ user.post('/login', async (ctx) => {
     ctx.body = await service.login(user);
 });
 
+user.post('/register', async (ctx) => {
+    const user = new User({
+        email: ctx.request.body.email,
+        name: ctx.request.body.name,
+        password: ctx.request.body.password,
+    });
+
+    const service = new UserService();
+
+    await service.register(user);
+
+    ctx.body = '';
+});
+
 export default user;
