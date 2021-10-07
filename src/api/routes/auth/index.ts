@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import passport from 'koa-passport';
-import { AuthRepository } from '../../services/auth/infrastructure/repository';
+import { UserRepository } from '../../services/user/infrastructure/repository';
 
 const auth = new Router();
 
@@ -14,9 +14,9 @@ auth.get('/callback', async (ctx, next) => {
     ctx.redirect('/');
 });
 
-auth.post('/email', async (ctx) => {
+auth.post('/email/check', async (ctx) => {
     const email = ctx.request.body.email;
-    const repository = new AuthRepository();
+    const repository = new UserRepository();
     ctx.body = await repository.findByEmail(email);
 });
 
