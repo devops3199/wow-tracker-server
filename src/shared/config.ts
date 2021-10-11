@@ -4,8 +4,8 @@ import BnetStrategy from 'passport-bnet';
 const oAuth = passport.use(
   new BnetStrategy(
     {
-      clientID: process.env.WOW_BNET_ID,
-      clientSecret: process.env.WOW_BNET_SECRET,
+      clientID: process.env.WOW_BNET_ID ?? '',
+      clientSecret: process.env.WOW_BNET_SECRET ?? '',
       callbackURL: 'https://localhost:4000/api/auth/callback',
       region: 'kr',
     },
