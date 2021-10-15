@@ -8,4 +8,8 @@ export class User {
     this.name = args.name;
     this.password = args.password;
   }
+
+  convertPasswordToHash(password: string) {
+    this.password = password;
+  }
 }
