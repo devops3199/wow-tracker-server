@@ -2,10 +2,12 @@ import { UserRepository } from '../infrastructure/repository';
 import { AuthRepository } from '../../auth/infrastructure/repository';
 import { User } from '../domain/model';
 import jwt from 'jsonwebtoken';
+import passwordHash from 'password-hash';
 
 export class UserService {
   async register(user: User) {
     const repository = new UserRepository();
+    user.password = passwordHash.generate(user.password); // TODO: Model 변경
     await repository.save([user]);
   }
 
@@ -21,10 +23,12 @@ export class UserService {
 
   async login(user: User) {
     const repository = new AuthRepository();
-    const result = await repository.getToken(user);
+    const { password } = await repository.getToken(user);
+
+    const isValid = passwordHash.verify(user.password, password);
 
     // Generate Tokens
-    if (result === '1') {
+    if (isValid) {
       return jwt.sign(
         {
           email: user.email,

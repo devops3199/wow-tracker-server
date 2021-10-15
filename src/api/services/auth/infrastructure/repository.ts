@@ -7,21 +7,18 @@ export class AuthRepository {
   async getToken(user: User) {
     const connection = mysql.createConnection(dbConnection);
 
-    const token = (user: User): Promise<string[]> => {
+    const token = (user: User): Promise<{ password: string }[]> => {
       return new Promise((resolve, reject) => {
-        connection.query(
-          `SELECT 1 FROM user WHERE email = ${user.email} AND password = ${user.password}`,
-          (error, results, fields) => {
-            if (error) {
-              reject(new Error('Request Query Error - Token'));
-            }
-            resolve(results);
-          },
-        );
+        connection.query(`SELECT password FROM user WHERE email = '${user.email}'`, (error, results, fields) => {
+          if (error) {
+            reject(new Error('Request Query Error - Token'));
+          }
+          resolve(results);
+        });
       });
     };
 
-    const result = await token(user);
+    const result: { password: string }[] = await token(user);
 
     connection.end();
 
