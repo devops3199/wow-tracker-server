@@ -3,7 +3,6 @@ import { dbConnection } from '../../../../shared/config';
 import { User } from '../../user/domain/model';
 
 export class AuthRepository {
-  // NOTE: This logic should be refactored.
   async getToken(user: User) {
     const connection = mysql.createConnection(dbConnection);
 
@@ -18,7 +17,7 @@ export class AuthRepository {
       });
     };
 
-    const result: { password: string }[] = await token(user);
+    const result = await token(user);
 
     connection.end();
 
