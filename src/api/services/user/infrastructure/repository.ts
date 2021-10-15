@@ -57,6 +57,7 @@ export class UserRepository {
           `INSERT INTO user (email, name, password, createdAt) VALUES ('${user.email}', '${user.name}', '${user.password}', now())`,
           (error, results, fields) => {
             if (error) {
+              console.log(error);
               reject(new Error('Request Query Error - save a user'));
             }
             resolve();

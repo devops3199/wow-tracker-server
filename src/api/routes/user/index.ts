@@ -13,20 +13,6 @@ user.get('/:userId', async (ctx) => {
   ctx.body = await service.getUser(id);
 });
 
-user.post('/', async (ctx) => {
-  const password = passwordHash.generate(ctx.request.body.password);
-
-  const user = new User({
-    email: ctx.request.body.email,
-    name: ctx.request.body.name,
-    password: password,
-  });
-
-  const service = new UserService();
-
-  await service.register(user);
-});
-
 user.post('/login', async (ctx) => {
   const password = passwordHash.generate(ctx.request.body.password);
 
@@ -42,10 +28,12 @@ user.post('/login', async (ctx) => {
 });
 
 user.post('/register', async (ctx) => {
+  const password = passwordHash.generate(ctx.request.body.password);
+
   const user = new User({
     email: ctx.request.body.email,
     name: ctx.request.body.name,
-    password: ctx.request.body.password,
+    password,
   });
 
   const service = new UserService();

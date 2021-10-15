@@ -30,7 +30,7 @@ export class UserService {
           email: user.email,
           name: user.name,
         },
-        'trackertower',
+        'wow',
       );
     }
 
