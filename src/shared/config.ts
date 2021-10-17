@@ -1,5 +1,6 @@
 import passport from 'koa-passport';
 import BnetStrategy from 'passport-bnet';
+import { createConnection } from 'typeorm';
 
 const oAuth = passport.use(
   new BnetStrategy(
@@ -23,4 +24,20 @@ const dbConnection = {
   database: process.env.WOW_DB_DATABASE,
 };
 
-export { oAuth, dbConnection };
+const initialize = async () => {
+  try {
+    await createConnection({
+      type: 'mysql',
+      host: process.env.WOW_DB_HOST,
+      port: Number(process.env.WOW_DB_PORT),
+      username: process.env.WOW_DB_USER,
+      password: process.env.WOW_DB_PASSWORD,
+      database: process.env.WOW_DB_DATABASE,
+      entities: ['entity/index.ts'],
+    });
+  } catch (e) {
+    console.error('connection error' + e);
+  }
+};
+
+export { oAuth, dbConnection, initialize };

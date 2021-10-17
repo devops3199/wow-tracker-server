@@ -16,6 +16,7 @@
     "@types/koa-passport": "^4.0.2",
     "@types/koa-router": "^7.4.4",
     "@types/mysql": "^2.15.19",
+    "@types/node": "^16.11.0",
     "@types/passport-bnet": "^2.0.2",
     "@types/password-hash": "^1.2.21",
     "dotenv": "^10.0.0",
@@ -30,12 +31,14 @@
   },
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1",
-    "password-hash": "^1.2.2",
     "koa": "^2.13.3",
     "koa-bodyparser": "^4.3.0",
     "koa-passport": "^4.1.4",
     "koa-router": "^10.1.1",
-    "passport-bnet": "^2.0.0"
+    "mysql": "^2.18.1",
+    "passport-bnet": "^2.0.0",
+    "password-hash": "^1.2.2",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.38"
   }
 }

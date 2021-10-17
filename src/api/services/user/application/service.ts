@@ -23,7 +23,7 @@ export class UserService {
 
   async login(user: User) {
     const repository = new AuthRepository();
-    const { password } = await repository.getToken(user);
+    const { password } = await repository.getToken(user); // TODO: get a user
 
     const isValid = passwordHash.verify(user.password, password);
 
