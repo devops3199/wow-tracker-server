@@ -7,7 +7,7 @@ import passwordHash from 'password-hash';
 export class UserService {
   async register(user: User) {
     const repository = new UserRepository();
-    user.convertPasswordToHash(passwordHash.generate(user.password));
+    user.password = passwordHash.generate(user.password);
     await repository.save([user]);
   }
 
