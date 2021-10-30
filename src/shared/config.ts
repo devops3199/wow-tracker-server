@@ -33,7 +33,7 @@ const initialize = async () => {
       username: process.env.WOW_DB_USER,
       password: process.env.WOW_DB_PASSWORD,
       database: process.env.WOW_DB_DATABASE,
-      entities: ['entity/index.ts'],
+      entities: ['src/entity/*{.js,.ts}'],
     });
   } catch (e) {
     console.error('connection error' + e);

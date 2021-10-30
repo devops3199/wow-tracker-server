@@ -6,7 +6,7 @@ export class User {
   readonly id!: number;
 
   @Column()
-  readonly email: string;
+  readonly _email: string;
 
   @Column()
   private _name: string;
@@ -15,7 +15,7 @@ export class User {
   private _password: string;
 
   constructor(args: { email: string; name: string; password: string }) {
-    this.email = args.email;
+    this._email = args.email;
     this._name = args.name;
     this._password = args.password;
   }
@@ -27,6 +27,10 @@ export class User {
   set password(password: string) {
     if (typeof password !== 'string') throw new Error('Password Hash Error');
     this._password = password;
+  }
+
+  get email() {
+    return this._email;
   }
 
   get name() {

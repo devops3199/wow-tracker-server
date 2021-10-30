@@ -3,6 +3,7 @@ import { AuthRepository } from '../../auth/infrastructure/repository';
 import { User } from '../domain/model';
 import jwt from 'jsonwebtoken';
 import passwordHash from 'password-hash';
+import { getCustomRepository } from 'typeorm';
 
 export class UserService {
   async register(user: User) {
@@ -12,8 +13,10 @@ export class UserService {
   }
 
   async getUser(id: number) {
-    const repository = new UserRepository();
-    return await repository.findById(id);
+    const userRepository = getCustomRepository(UserRepository);
+    const result = await userRepository.findById(id);
+    console.log(result);
+    return result;
   }
 
   async getEmail(email: string) {
