@@ -15,7 +15,6 @@ export class UserService {
   async getUser(id: number) {
     const userRepository = getCustomRepository(UserRepository);
     const result = await userRepository.findById(id);
-    console.log(result);
     return result;
   }
 
