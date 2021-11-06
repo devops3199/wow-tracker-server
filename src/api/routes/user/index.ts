@@ -13,15 +13,9 @@ user.get('/:userId', async (ctx) => {
 });
 
 user.post('/login', async (ctx) => {
-  const user = new User({
-    email: ctx.request.body.email,
-    name: '',
-    password: ctx.request.body.password,
-  });
-
   const service = new UserService();
 
-  ctx.body = await service.login(user);
+  ctx.body = await service.login(ctx.request.body.email, ctx.request.body.password);
 });
 
 user.post('/register', async (ctx) => {
@@ -29,6 +23,7 @@ user.post('/register', async (ctx) => {
     email: ctx.request.body.email,
     name: ctx.request.body.name,
     password: ctx.request.body.password,
+    createdAt: ctx.request.body.createdAt,
   });
 
   const service = new UserService();

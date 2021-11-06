@@ -6,22 +6,24 @@ export class User {
   id!: number;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  password: string;
+  password!: string;
 
   @Column()
-  createdAt: Date;
+  createdAt!: Date;
 
   constructor(args: { email: string; name: string; password: string; createdAt: Date }) {
-    this.email = args.email;
-    this.name = args.name;
-    this.password = args.password;
-    this.createdAt = args.createdAt;
+    if (args) {
+      this.email = args.email;
+      this.name = args.name;
+      this.password = args.password;
+      this.createdAt = args.createdAt;
+    }
   }
 
   hashPassword(password: string) {

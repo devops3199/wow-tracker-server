@@ -36,7 +36,7 @@ const initialize = async () => {
       entities: ['src/entity/*{.js,.ts}'],
     });
   } catch (e) {
-    console.error('connection error' + e);
+    console.error('connection error >> ' + e);
   }
 };
 

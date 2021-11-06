@@ -7,9 +7,9 @@ import { getCustomRepository } from 'typeorm';
 
 export class UserService {
   async register(user: User) {
-    const repository = new UserRepository();
+    const userRepository = getCustomRepository(UserRepository);
     user.password = passwordHash.generate(user.password);
-    await repository.save([user]);
+    await userRepository.save(user);
   }
 
   async getUser(id: number) {
@@ -23,11 +23,17 @@ export class UserService {
     return await repository.findByEmail(email);
   }
 
-  async login(user: User) {
+  async login(email: string, password: string) {
     const repository = new AuthRepository();
-    const { password } = await repository.getToken(user); // TODO: get a user
+    const user = new User({
+      email,
+      password,
+      name: '',
+      createdAt: new Date(),
+    });
+    const { password: hash } = await repository.getToken(user); // TODO: get a user
 
-    const isValid = passwordHash.verify(user.password, password);
+    const isValid = passwordHash.verify(user.password, hash);
 
     // Generate Tokens
     if (isValid) {
