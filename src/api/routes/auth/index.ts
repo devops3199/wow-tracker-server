@@ -14,10 +14,4 @@ auth.get('/callback', async (ctx, next) => {
   ctx.redirect('/');
 });
 
-auth.post('/email/check', async (ctx) => {
-  const email = ctx.request.body.email;
-  const repository = new UserRepository();
-  ctx.body = await repository.findByEmail(email);
-});
-
 export default auth;

@@ -19,8 +19,8 @@ export class UserService {
   }
 
   async getEmail(email: string) {
-    const repository = new UserRepository();
-    return await repository.findByEmail(email);
+    const userRepository = getCustomRepository(UserRepository);
+    return await userRepository.findByEmail(email);
   }
 
   async login(email: string, password: string) {
@@ -46,6 +46,6 @@ export class UserService {
       );
     }
 
-    return '';
+    return 'Invalid';
   }
 }

@@ -33,4 +33,10 @@ user.post('/register', async (ctx) => {
   ctx.body = '';
 });
 
+user.post('/email/check', async (ctx) => {
+  const service = new UserService();
+  const result = await service.getEmail(ctx.request.body.email);
+  ctx.body = result ? 'Valid' : 'Invalid';
+});
+
 export default user;
