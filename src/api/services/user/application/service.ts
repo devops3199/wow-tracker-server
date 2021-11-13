@@ -1,5 +1,4 @@
 import { UserRepository } from '../infrastructure/repository';
-import { AuthRepository } from '../../auth/infrastructure/repository';
 import { User } from '../domain/model';
 import jwt from 'jsonwebtoken';
 import passwordHash from 'password-hash';
@@ -24,26 +23,21 @@ export class UserService {
   }
 
   async login(email: string, password: string) {
-    const repository = new AuthRepository();
-    const user = new User({
-      email,
-      password,
-      name: '',
-      createdAt: new Date(),
-    });
-    const { password: hash } = await repository.getToken(user); // TODO: get a user
+    const userRepository = getCustomRepository(UserRepository);
+    const user = await userRepository.findByEmail(email); // TODO: get a user
 
-    const isValid = passwordHash.verify(user.password, hash);
+    if (user) {
+      const isValid = passwordHash.verify(password, user.password);
 
-    // Generate Tokens
-    if (isValid) {
-      return jwt.sign(
-        {
-          email: user.email,
-          name: user.name,
-        },
-        'wow',
-      );
+      if (isValid) {
+        return jwt.sign(
+          {
+            email: user.email,
+            name: user.name,
+          },
+          'wow',
+        );
+      }
     }
 
     return 'Invalid';

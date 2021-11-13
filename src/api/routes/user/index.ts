@@ -15,7 +15,13 @@ user.get('/:userId', async (ctx) => {
 user.post('/login', async (ctx) => {
   const service = new UserService();
 
-  ctx.body = await service.login(ctx.request.body.email, ctx.request.body.password);
+  const token = await service.login(ctx.request.body.email, ctx.request.body.password);
+
+  if (token === 'Invalid') {
+    throw ctx.throw(401, 'Unauthorized');
+  }
+
+  ctx.body = token;
 });
 
 user.post('/register', async (ctx) => {
