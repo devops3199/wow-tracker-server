@@ -13,9 +13,11 @@ user.get('/:userId', async (ctx) => {
 });
 
 user.post('/login', async (ctx) => {
+  const { email, password } = ctx.request.body;
+
   const service = new UserService();
 
-  const token = await service.login(ctx.request.body.email, ctx.request.body.password);
+  const token = await service.login(email, password);
 
   if (token === 'Invalid') {
     throw ctx.throw(401, 'Unauthorized');
@@ -25,11 +27,13 @@ user.post('/login', async (ctx) => {
 });
 
 user.post('/register', async (ctx) => {
+  const { email, name, password, createdAt } = ctx.request.body;
+
   const user = new User({
-    email: ctx.request.body.email,
-    name: ctx.request.body.name,
-    password: ctx.request.body.password,
-    createdAt: ctx.request.body.createdAt,
+    email,
+    name,
+    password,
+    createdAt,
   });
 
   const service = new UserService();
@@ -39,10 +43,12 @@ user.post('/register', async (ctx) => {
   ctx.body = '';
 });
 
+// FIXME: refactor
 user.post('/email/check', async (ctx) => {
+  const { email } = ctx.request.body;
   const service = new UserService();
-  const result = await service.getEmail(ctx.request.body.email);
-  ctx.body = result ? 'Valid' : 'Invalid';
+  const result = await service.getEmail(email);
+  ctx.body = result ? 'Ok' : 'Duplicate';
 });
 
 export default user;
