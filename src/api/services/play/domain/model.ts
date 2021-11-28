@@ -1,15 +1,43 @@
-export class Play {
-  date: string;
-  begin: string;
-  end: string;
-  dungeon: number;
-  raid: number;
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-  constructor(args: { date: string; begin: string; end: string; dungeon: number; raid: number }) {
-    this.date = args.date;
-    this.begin = args.begin;
-    this.end = args.end;
-    this.dungeon = args.dungeon;
-    this.raid = args.raid;
+@Entity()
+export class Play {
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column()
+  playerId!: number;
+
+  @Column()
+  beginAt!: Date;
+
+  @Column()
+  endAt!: Date;
+
+  @Column()
+  dungeonCount!: number;
+
+  @Column()
+  raidCount!: number;
+
+  @Column()
+  playAt!: Date;
+
+  constructor(args: {
+    playerId: number;
+    beginAt: Date;
+    endAt: Date;
+    dungeonCount: number;
+    raidCount: number;
+    playAt: Date;
+  }) {
+    if (args) {
+      this.playerId = args.playerId;
+      this.beginAt = args.beginAt;
+      this.endAt = args.endAt;
+      this.dungeonCount = args.dungeonCount;
+      this.raidCount = args.raidCount;
+      this.playAt = args.playAt;
+    }
   }
 }
