@@ -2,6 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
+import { authMiddleware } from './middleware';
 import api from './api/routes/index';
 import { initialize } from './shared/config';
 
@@ -16,6 +17,6 @@ router.get('/ping', (ctx) => {
 
 initialize(); // NOTE: create a db connection
 
-app.use(bodyParser()).use(passport.initialize()).use(router.routes()).use(router.allowedMethods());
+app.use(bodyParser()).use(authMiddleware).use(passport.initialize()).use(router.routes()).use(router.allowedMethods());
 
 app.listen(4000, () => console.log('4000 Port Server Running'));
