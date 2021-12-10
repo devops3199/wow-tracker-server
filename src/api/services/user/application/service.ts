@@ -30,6 +30,7 @@ export class UserService {
       const isValid = passwordHash.verify(password, user.password);
 
       if (isValid) {
+        // FIXME: to hash
         return jwt.sign(
           {
             email: user.email,
