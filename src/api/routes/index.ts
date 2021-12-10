@@ -1,7 +1,7 @@
 import Router from 'koa-router';
-import play from './play/index';
-import auth from './auth/index';
-import user from './user/index';
+import play from './play';
+import auth from './auth';
+import user from './user';
 
 const api = new Router();
 
