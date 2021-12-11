@@ -39,6 +39,7 @@
     "passport-bnet": "^2.0.0",
     "password-hash": "^1.2.2",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.38"
+    "typeorm": "^0.2.38",
+    "uuid": "^8.3.2"
   }
 }
