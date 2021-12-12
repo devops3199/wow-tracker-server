@@ -26,4 +26,8 @@ export class User {
       this.createdAt = args.createdAt;
     }
   }
+
+  verifyPassword(password: string) {
+    return passwordHash.verify(password, this.password);
+  }
 }

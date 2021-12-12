@@ -1,6 +1,9 @@
 import Router from 'koa-router';
 import { UserService } from '../../services/user/application/service';
+import { AuthService } from '../../services/auth/application/service';
 import { User } from '../../services/user/domain/model';
+import { Auth } from '../../services/auth/domain/model';
+import { v4 as uuidv4 } from 'uuid';
 
 const user = new Router();
 
@@ -15,15 +18,31 @@ user.get('/:userId', async (ctx) => {
 user.post('/login', async (ctx) => {
   const { email, password } = ctx.request.body;
 
-  const service = new UserService();
+  const userService = new UserService();
+  const authService = new AuthService();
 
-  const token = await service.login(email, password);
+  const user = await userService.getEmail(email);
 
-  if (token === 'Invalid') {
+  console.log(user);
+
+  if (!user) {
     throw ctx.throw(401, 'Unauthorized');
   }
 
-  ctx.body = token;
+  const isValid = user.verifyPassword(password);
+
+  if (!isValid) {
+    throw ctx.throw(401, 'Unauthorized');
+  }
+
+  const auth = new Auth({
+    id: uuidv4(),
+    createdAt: new Date(),
+  });
+
+  await authService.save(auth);
+
+  ctx.body = auth.generateToken();
 });
 
 user.post('/register', async (ctx) => {

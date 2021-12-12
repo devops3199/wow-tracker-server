@@ -4,12 +4,12 @@ import { getCustomRepository } from 'typeorm';
 
 export class AuthService {
   retrieve(id: number) {
-    const playRepository = getCustomRepository(AuthRepository);
-    return playRepository.findOne(id);
+    const authRepository = getCustomRepository(AuthRepository);
+    return authRepository.findOne(id);
   }
 
   save(model: Auth) {
-    const playRepository = getCustomRepository(AuthRepository);
-    playRepository.save([model]);
+    const authRepository = getCustomRepository(AuthRepository);
+    authRepository.save([model]);
   }
 }
