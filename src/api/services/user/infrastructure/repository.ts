@@ -3,8 +3,8 @@ import { User } from '../domain/model';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  findById(id: number) {
-    return this.findById(id);
+  findById(id: number): Promise<User> {
+    return this.findOneOrFail(id);
   }
 
   findByEmail(email: string) {

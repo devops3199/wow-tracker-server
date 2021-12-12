@@ -23,8 +23,6 @@ user.post('/login', async (ctx) => {
 
   const user = await userService.getEmail(email);
 
-  console.log(user);
-
   if (!user) {
     throw ctx.throw(401, 'Unauthorized');
   }
