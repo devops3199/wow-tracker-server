@@ -5,21 +5,19 @@ import passwordHash from 'password-hash';
 import { getCustomRepository } from 'typeorm';
 
 export class UserService {
-  async register(user: User) {
+  register(user: User) {
     const userRepository = getCustomRepository(UserRepository);
-    user.password = passwordHash.generate(user.password);
-    await userRepository.save(user);
+    userRepository.save(user);
   }
 
-  async getUser(id: number) {
+  getUser(id: number) {
     const userRepository = getCustomRepository(UserRepository);
-    const result = await userRepository.findById(id);
-    return result;
+    return userRepository.findById(id);
   }
 
-  async getEmail(email: string) {
+  getEmail(email: string) {
     const userRepository = getCustomRepository(UserRepository);
-    return await userRepository.findByEmail(email);
+    return userRepository.findByEmail(email);
   }
 
   async login(email: string, password: string) {

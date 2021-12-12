@@ -40,7 +40,7 @@ user.post('/register', async (ctx) => {
 
   await service.register(user);
 
-  ctx.body = '';
+  ctx.status = 201;
 });
 
 // FIXME: refactor

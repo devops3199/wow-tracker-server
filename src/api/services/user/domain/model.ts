@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import passwordHash from 'password-hash';
 
 @Entity()
 export class User {
@@ -21,13 +22,8 @@ export class User {
     if (args) {
       this.email = args.email;
       this.name = args.name;
-      this.password = args.password;
+      this.password = passwordHash.generate(args.password);
       this.createdAt = args.createdAt;
     }
-  }
-
-  hashPassword(password: string) {
-    if (typeof password !== 'string') throw new Error('Password Hash Error');
-    this.password = password;
   }
 }
