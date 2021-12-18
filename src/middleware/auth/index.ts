@@ -16,11 +16,14 @@ export const authMiddleware = async (ctx: Context, next: () => Promise<any>) => 
   const { authorization: token } = ctx.request.header;
 
   if (!token) {
-    // FIXME: throw 403
     throw ctx.throw(403, 'Invalid token');
   }
-  // @ts-ignore
-  const { id } = jwt.decode(token);
+
+  const { id } = jwt.decode(token) as { id: string | undefined };
+
+  if (!id) {
+    throw ctx.throw(403, 'Invalid token');
+  }
 
   const service = new AuthService();
   const auth = await service.retrieve(id);
