@@ -8,7 +8,7 @@ export class UserService {
     userRepository.save(user);
   }
 
-  getUser(id: number): Promise<User> {
+  getUser(id: number) {
     const userRepository = getCustomRepository(UserRepository);
     return userRepository.findById(id);
   }
