@@ -35,6 +35,7 @@ user.post('/login', async (ctx) => {
 
   const auth = new Auth({
     id: uuidv4(),
+    userId: user.id,
     createdAt: new Date(),
   });
 

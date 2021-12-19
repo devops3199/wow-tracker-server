@@ -4,14 +4,18 @@ import jwt from 'jsonwebtoken';
 @Entity()
 export class Auth {
   @PrimaryColumn()
-  id!: number;
+  id!: string;
+
+  @Column()
+  userId!: number;
 
   @Column()
   createdAt!: Date;
 
-  constructor(args: { id: number; createdAt: Date }) {
+  constructor(args: { id: string; userId: number; createdAt: Date }) {
     if (args) {
       this.id = args.id;
+      this.userId = args.userId;
       this.createdAt = args.createdAt;
     }
   }
@@ -20,6 +24,7 @@ export class Auth {
     return jwt.sign(
       {
         id: this.id,
+        userId: this.userId,
         createdAt: this.createdAt,
       },
       'hunter',
