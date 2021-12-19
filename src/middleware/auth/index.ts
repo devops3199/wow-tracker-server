@@ -19,18 +19,20 @@ export const authMiddleware = async (ctx: Context, next: () => Promise<any>) => 
     throw ctx.throw(403, 'Invalid token');
   }
 
-  const { id } = jwt.decode(token) as { id: string | undefined };
+  const { id, userId } = jwt.decode(token) as { id: string | undefined; userId: number | undefined };
 
   if (!id) {
     throw ctx.throw(403, 'Invalid token');
   }
 
-  const service = new AuthService();
-  const auth = await service.retrieve(id);
+  const authService = new AuthService();
+  const auth = await authService.retrieve(id);
 
   if (!auth) {
     throw ctx.throw(401, 'Invalid token');
   }
+
+  ctx.state.userId = userId;
 
   await next();
 };

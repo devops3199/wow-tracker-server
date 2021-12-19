@@ -7,8 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 const user = new Router();
 
-user.get('/:userId', async (ctx) => {
-  const id = Number(ctx.params.userId);
+user.get('/self', async (ctx) => {
+  const { userId: id } = ctx.state as { userId: number };
 
   const service = new UserService();
 
