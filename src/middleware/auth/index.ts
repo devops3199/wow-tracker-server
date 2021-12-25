@@ -29,7 +29,7 @@ export const authMiddleware = async (ctx: Context, next: () => Promise<any>) => 
   const auth = await authService.retrieve(id);
 
   if (!auth) {
-    throw ctx.throw(401, 'Invalid token');
+    throw ctx.throw(401, 'An unauthorized user');
   }
 
   ctx.state.userId = userId;
