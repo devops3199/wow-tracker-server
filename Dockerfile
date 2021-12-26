@@ -1,5 +1,5 @@
 # 이미지 사용
-FROM node:14-alpine
+FROM node:16-alpine
 
 # 소스 전체 복사
 COPY . /usr/src/app/server
