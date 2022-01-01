@@ -1,12 +1,13 @@
 # 이미지 사용
 FROM node:16-alpine
 
-# 소스 전체 복사
-COPY . /usr/src/app/server
+WORKDIR /usr/src/app
 
-# 해당 디렉토리로 이동 후 환경 설치
-WORKDIR /usr/src/app/server
+COPY ./package*.json ./
+
 RUN npm install
+
+COPY ./ ./
 
 # 실행
 EXPOSE 4000
