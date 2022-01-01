@@ -1,4 +1,4 @@
-import { Context } from 'koa';
+import { Context } from '../../shared/types';
 import { UserService } from '../../api/services/user/application/service';
 
 // TODO: 이것도 다른 미들웨어로 분리?
@@ -13,7 +13,7 @@ export const userMiddleware = async (ctx: Context, next: () => Promise<any>) => 
   }
 
   const userService = new UserService();
-  ctx.state.user = await userService.getUser(ctx.state.userId);
+  ctx.state.user = await userService.getUser(ctx.state.userId!);
 
   await next();
 };

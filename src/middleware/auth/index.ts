@@ -1,4 +1,4 @@
-import { Context } from 'koa';
+import { Context } from '../../shared/types';
 import { AuthService } from '../../api/services/auth/application/service';
 import jwt from 'jsonwebtoken';
 
