@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import cors from '@koa/cors';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
@@ -18,6 +19,7 @@ router.get('/ping', (ctx) => {
 initialize(); // NOTE: create a db connection
 
 app
+  .use(cors())
   .use(bodyParser())
   .use(authMiddleware)
   .use(userMiddleware)
