@@ -19,7 +19,7 @@ export const authMiddleware = async (ctx: Context, next: () => Promise<any>) => 
     throw ctx.throw(403, 'Invalid token');
   }
 
-  const { id, userId } = jwt.decode(token) as { id: string | undefined; userId: number | undefined };
+  const { id, userId } = jwt.decode(token) as { id?: string; userId?: number };
 
   if (!id) {
     throw ctx.throw(403, 'Invalid token');
