@@ -8,11 +8,13 @@ import { v4 as uuidv4 } from 'uuid';
 const user = new Router();
 
 user.get('/self', async (ctx) => {
-  const { userId: id } = ctx.state as { userId: number };
+  const { userId } = ctx.state as { userId: number };
 
   const service = new UserService();
 
-  ctx.body = await service.getUser(id);
+  const { id, email, name } = await service.getUser(userId);
+
+  ctx.body = { id, email, name };
 });
 
 user.post('/login', async (ctx) => {
@@ -21,6 +23,7 @@ user.post('/login', async (ctx) => {
   const userService = new UserService();
   const authService = new AuthService();
 
+  // FIXME: Domain Logic to Model
   const user = await userService.getEmail(email);
 
   if (!user) {
@@ -41,7 +44,7 @@ user.post('/login', async (ctx) => {
 
   await authService.save(auth);
 
-  ctx.body = auth.generateToken();
+  ctx.body = auth.generateToken(); // FIXME: token + user info
 });
 
 user.post('/register', async (ctx) => {
