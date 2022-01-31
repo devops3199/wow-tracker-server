@@ -40,12 +40,15 @@ user.post('/register', async (ctx) => {
   ctx.status = 201;
 });
 
-// FIXME: refactor
 user.post('/email/check', async (ctx) => {
   const { email } = ctx.request.body;
   const service = new UserService();
-  const result = await service.getEmail(email);
-  ctx.body = result ? 'Ok' : 'Duplicate';
+  const result = await service.checkDuplicates(email);
+  if (result) {
+    ctx.status = 409; // NOTE: Conflict
+    return;
+  }
+  ctx.status = 204;
 });
 
 export default user;

@@ -10,4 +10,8 @@ export class UserRepository extends Repository<User> {
   findByConditions(args: Record<string, any>) {
     return this.findOneOrFail({ where: args });
   }
+
+  findByEmail(email: string) {
+    return this.findOne({ email });
+  }
 }

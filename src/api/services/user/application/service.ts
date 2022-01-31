@@ -13,8 +13,9 @@ export class UserService {
     return userRepository.findById(id);
   }
 
-  getEmail(email: string) {
+  async checkDuplicates(email: string) {
     const userRepository = getCustomRepository(UserRepository);
-    return userRepository.findByConditions({ email });
+    const user = await userRepository.findByEmail(email);
+    return user;
   }
 }
