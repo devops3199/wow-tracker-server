@@ -15,6 +15,6 @@ export class UserService {
 
   getEmail(email: string) {
     const userRepository = getCustomRepository(UserRepository);
-    return userRepository.findByEmail(email);
+    return userRepository.findByConditions({ email });
   }
 }

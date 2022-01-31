@@ -7,7 +7,7 @@ export class UserRepository extends Repository<User> {
     return this.findOneOrFail(id);
   }
 
-  findByEmail(email: string) {
-    return this.findOne({ email });
+  findByConditions(args: Record<string, any>) {
+    return this.findOneOrFail({ where: args });
   }
 }

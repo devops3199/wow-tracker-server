@@ -2,8 +2,6 @@ import Router from 'koa-router';
 import { UserService } from '../../services/user/application/service';
 import { AuthService } from '../../services/auth/application/service';
 import { User } from '../../services/user/domain/model';
-import { Auth } from '../../services/auth/domain/model';
-import { v4 as uuidv4 } from 'uuid';
 
 const user = new Router();
 
@@ -20,31 +18,9 @@ user.get('/self', async (ctx) => {
 user.post('/login', async (ctx) => {
   const { email, password } = ctx.request.body;
 
-  const userService = new UserService();
   const authService = new AuthService();
 
-  // FIXME: Domain Logic to Model
-  const user = await userService.getEmail(email);
-
-  if (!user) {
-    throw ctx.throw(401, 'Unauthorized');
-  }
-
-  const isValid = user.verifyPassword(password);
-
-  if (!isValid) {
-    throw ctx.throw(401, 'Unauthorized');
-  }
-
-  const auth = new Auth({
-    id: uuidv4(),
-    userId: user.id,
-    createdAt: new Date(),
-  });
-
-  await authService.save(auth);
-
-  ctx.body = auth.generateToken(); // FIXME: token + user info
+  ctx.body = await authService.login(email, password);
 });
 
 user.post('/register', async (ctx) => {
