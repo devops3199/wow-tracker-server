@@ -7,7 +7,6 @@ import { getCustomRepository } from 'typeorm';
 export class AuthService {
   retrieve(id: string) {
     const authRepository = getCustomRepository(AuthRepository);
-    console.log(authRepository.getId, 'auth - retrieve');
     return authRepository.findOne(id);
   }
 
@@ -15,8 +14,6 @@ export class AuthService {
   async login(email: string, password: string) {
     const userRepository = getCustomRepository(UserRepository);
     const authRepository = getCustomRepository(AuthRepository);
-    console.log(userRepository.getId, 'user - login');
-    console.log(authRepository.getId, 'auth - login');
 
     const user = await userRepository.findByConditions({ email });
 
