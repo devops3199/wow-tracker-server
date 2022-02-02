@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import Koa from 'koa';
 import cors from '@koa/cors';
 import Router from 'koa-router';
