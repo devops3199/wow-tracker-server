@@ -1,9 +1,8 @@
-import { PlayRepository } from '../infrastructure/repository';
-import { getCustomRepository } from 'typeorm';
+import { Play } from '../domain/model';
+import { Service } from '../../../../service';
 
-export class PlayService {
-  getPlay(userId: number) {
-    const playRepository = getCustomRepository(PlayRepository);
-    return playRepository.findByUserId(userId);
+export class PlayService extends Service {
+  async getPlay(userId: number) {
+    return await this.entityManager.findOneOrFail(Play, { where: { userId } });
   }
 }

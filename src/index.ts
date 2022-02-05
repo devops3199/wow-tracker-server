@@ -4,7 +4,7 @@ import cors from '@koa/cors';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
-import { authMiddleware, userMiddleware } from './middleware';
+import { authMiddleware, userMiddleware, typediMiddleware } from './middleware';
 import api from './api/routes/index';
 import { initialize } from './shared/config';
 
@@ -22,6 +22,7 @@ initialize(); // NOTE: create a db connection
 app
   .use(cors())
   .use(bodyParser())
+  .use(typediMiddleware)
   .use(authMiddleware)
   .use(userMiddleware)
   .use(passport.initialize())

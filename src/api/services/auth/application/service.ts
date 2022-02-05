@@ -1,21 +1,15 @@
-import { AuthRepository } from '../infrastructure/repository';
-import { UserRepository } from '../../user/infrastructure/repository';
+import { User } from '../../user/domain/model';
 import { Auth } from '../domain/model';
+import { Service } from '../../../../service';
 import { v4 as uuidv4 } from 'uuid';
-import { getCustomRepository } from 'typeorm';
 
-export class AuthService {
+export class AuthService extends Service {
   retrieve(id: string) {
-    const authRepository = getCustomRepository(AuthRepository);
-    return authRepository.findOne(id);
+    return this.entityManager.findOne(Auth, id);
   }
 
-  // TODO: Transaction
   async login(email: string, password: string) {
-    const userRepository = getCustomRepository(UserRepository);
-    const authRepository = getCustomRepository(AuthRepository);
-
-    const user = await userRepository.findByConditions({ email });
+    const user = await this.entityManager.findOneOrFail(User, { where: { email } });
 
     const isValid = user.verifyPassword(password);
 
@@ -30,13 +24,12 @@ export class AuthService {
       createdAt: new Date(),
     });
 
-    await authRepository.save(auth);
+    await this.entityManager.save(Auth, [auth]);
 
     return auth.generateToken();
   }
 
-  save(model: Auth) {
-    const authRepository = getCustomRepository(AuthRepository);
-    authRepository.save([model]);
+  async save(model: Auth) {
+    this.entityManager.save(Auth, [model]);
   }
 }

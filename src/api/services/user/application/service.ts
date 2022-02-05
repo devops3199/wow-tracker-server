@@ -1,21 +1,16 @@
-import { UserRepository } from '../infrastructure/repository';
+import { Service } from '../../../../service';
 import { User } from '../domain/model';
-import { getCustomRepository } from 'typeorm';
 
-export class UserService {
-  register(user: User) {
-    const userRepository = getCustomRepository(UserRepository);
-    userRepository.save(user);
+export class UserService extends Service {
+  async register(user: User) {
+    this.entityManager.save(User, [user]);
   }
 
-  getUser(id: number) {
-    const userRepository = getCustomRepository(UserRepository);
-    return userRepository.findById(id);
+  async getUser(id: number) {
+    return this.entityManager.findOneOrFail(User, id);
   }
 
   async checkDuplicates(email: string) {
-    const userRepository = getCustomRepository(UserRepository);
-    const user = await userRepository.findByEmail(email);
-    return user;
+    return await this.entityManager.findOne(User, { where: { email } });
   }
 }
