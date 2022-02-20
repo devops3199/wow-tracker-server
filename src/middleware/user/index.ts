@@ -13,7 +13,7 @@ export const userMiddleware = async (ctx: Context, next: () => Promise<any>) => 
   }
 
   const userService = new UserService();
-  ctx.state.user = await userService.getUser(ctx.state.userId!);
+  // ctx.state.user = await userService.getUser(ctx.state.bnetToken!);
 
   await next();
 };

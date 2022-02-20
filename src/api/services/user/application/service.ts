@@ -6,11 +6,7 @@ export class UserService extends Service {
     this.entityManager.save(User, [user]);
   }
 
-  async getUser(id: number) {
-    return this.entityManager.findOneOrFail(User, id);
-  }
-
-  async checkDuplicates(email: string) {
-    return await this.entityManager.findOne(User, { where: { email } });
+  async getUser(id: number, token: string) {
+    return this.entityManager.findOne(User, { where: { id, token } });
   }
 }

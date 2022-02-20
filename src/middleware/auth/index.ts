@@ -1,14 +1,13 @@
 import { Context } from '../../shared/types';
-import { AuthService } from '../../api/services/auth/application/service';
 import jwt from 'jsonwebtoken';
 
 // TODO: 이것도 다른 미들웨어로 분리?
-const exceptions = ['/api/user/register', '/api/user/login', '/api/user/email/check', '/ping', '/api/auth'];
+const exceptions = [];
 
 export const authMiddleware = async (ctx: Context, next: () => Promise<any>) => {
   const { url } = ctx.request;
 
-  if (exceptions.includes(url) || url.startsWith('/api/auth/callback?')) {
+  if (url.startsWith('/api/auth')) {
     await next();
     return;
   }
@@ -19,20 +18,11 @@ export const authMiddleware = async (ctx: Context, next: () => Promise<any>) => 
     throw ctx.throw(403, 'Invalid token');
   }
 
-  const { id, userId } = jwt.decode(token) as { id?: string; userId?: number };
+  const { bnetToken } = jwt.decode(token) as { bnetToken?: string };
 
-  if (!id) {
+  if (!bnetToken) {
     throw ctx.throw(403, 'Invalid token');
   }
-
-  const authService = new AuthService();
-  const auth = await authService.retrieve(id);
-
-  if (!auth) {
-    throw ctx.throw(401, 'An unauthorized user');
-  }
-
-  ctx.state.userId = userId;
 
   await next();
 };

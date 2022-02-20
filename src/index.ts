@@ -23,7 +23,7 @@ app
   .use(cors())
   .use(bodyParser())
   .use(typediMiddleware)
-  .use(authMiddleware)
+  // .use(authMiddleware) // FIXME: Temp
   .use(userMiddleware)
   .use(passport.initialize())
   .use(passport.session())

@@ -3,14 +3,14 @@ import BnetStrategy from 'passport-bnet';
 import { createConnection } from 'typeorm';
 import { Container, Token } from 'typedi';
 
-const BNET = new Token<string>('BNET');
+const BNET = new Token<{ id: number; battletag: string; token: string }>('BNET');
 
 const oAuth = passport.use(
   new BnetStrategy(
     {
       clientID: process.env.WOW_BNET_ID ?? '',
       clientSecret: process.env.WOW_BNET_SECRET ?? '',
-      callbackURL: 'http://localhost:4000/api/auth/callback',
+      callbackURL: 'http://localhost:4000/api/auth',
       region: 'kr',
     },
     (accessToken, refreshToken, profile, done) => {

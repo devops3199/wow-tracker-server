@@ -1,33 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import passwordHash from 'password-hash';
+import { Entity, PrimaryColumn, CreateDateColumn, Column } from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id!: number;
 
-  @Column()
-  email!: string;
+  @PrimaryColumn()
+  token!: string;
 
   @Column()
-  name!: string;
+  battleTag!: string;
 
-  @Column()
-  password!: string;
-
-  @Column()
+  @CreateDateColumn()
   createdAt!: Date;
 
-  constructor(args: { email: string; name: string; password: string; createdAt: Date }) {
+  constructor(args: { id: number; token: string; battleTag: string }) {
     if (args) {
-      this.email = args.email;
-      this.name = args.name;
-      this.password = passwordHash.generate(args.password);
-      this.createdAt = args.createdAt;
+      this.id = args.id;
+      this.token = args.token;
+      this.battleTag = args.battleTag;
     }
-  }
-
-  verifyPassword(password: string) {
-    return passwordHash.verify(password, this.password);
   }
 }
