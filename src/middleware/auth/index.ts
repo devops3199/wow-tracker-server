@@ -3,12 +3,12 @@ import { AuthService } from '../../api/services/auth/application/service';
 import jwt from 'jsonwebtoken';
 
 // TODO: 이것도 다른 미들웨어로 분리?
-const exceptions = ['/api/user/register', '/api/user/login', '/api/user/email/check', '/ping'];
+const exceptions = ['/api/user/register', '/api/user/login', '/api/user/email/check', '/ping', '/api/auth'];
 
 export const authMiddleware = async (ctx: Context, next: () => Promise<any>) => {
   const { url } = ctx.request;
 
-  if (exceptions.includes(url)) {
+  if (exceptions.includes(url) || url.startsWith('/api/auth/callback?')) {
     await next();
     return;
   }

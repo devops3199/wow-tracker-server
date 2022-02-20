@@ -26,6 +26,7 @@ app
   .use(authMiddleware)
   .use(userMiddleware)
   .use(passport.initialize())
+  .use(passport.session())
   .use(router.routes())
   .use(router.allowedMethods());
 

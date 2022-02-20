@@ -1,16 +1,19 @@
 import Router from 'koa-router';
 import passport from 'koa-passport';
+import { Container } from 'typedi';
+import { BNET } from '../../../shared/config';
 
 const auth = new Router();
 
 auth.get('/', passport.authenticate('bnet'));
 
-auth.get('/callback', async (ctx, next) => {
-  passport.authenticate('bnet', { session: false, failureRedirect: '/' }, async (err, profile, info) => {
-    console.log(profile, 'profile');
-  })(ctx, next);
-
-  ctx.redirect('/');
-});
+auth.get(
+  '/callback',
+  passport.authenticate('bnet', { session: false, failureRedirect: '/ping' }),
+  async (ctx, next) => {
+    const profile = Container.get(BNET);
+    ctx.body = profile;
+  },
+);
 
 export default auth;
