@@ -9,10 +9,10 @@ export class Play {
   playerId!: number;
 
   @Column()
-  beginAt!: Date;
+  beginTime!: Date;
 
   @Column()
-  endAt!: Date;
+  endTime!: Date;
 
   @Column()
   dungeonCount!: number;
@@ -21,23 +21,23 @@ export class Play {
   raidCount!: number;
 
   @Column()
-  playAt!: Date;
+  playTime!: Date;
 
   constructor(args: {
     playerId: number;
-    beginAt: Date;
-    endAt: Date;
+    beginTime: Date;
+    endTime: Date;
     dungeonCount: number;
     raidCount: number;
-    playAt: Date;
+    playTime: Date;
   }) {
     if (args) {
       this.playerId = args.playerId;
-      this.beginAt = args.beginAt;
-      this.endAt = args.endAt;
+      this.beginTime = args.beginTime;
+      this.endTime = args.endTime;
       this.dungeonCount = args.dungeonCount;
       this.raidCount = args.raidCount;
-      this.playAt = args.playAt;
+      this.playTime = args.playTime;
     }
   }
 }
