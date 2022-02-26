@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/koa-bodyparser", "npm:4.3.5"],
             ["@types/koa-passport", "npm:4.0.3"],
             ["@types/koa-router", "npm:7.4.4"],
+            ["@types/koa-session", "npm:5.10.6"],
             ["@types/mysql", "npm:2.15.20"],
             ["@types/node", "npm:16.11.22"],
             ["@types/passport-bnet", "npm:2.0.2"],
@@ -56,6 +57,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["koa-bodyparser", "npm:4.3.0"],
             ["koa-passport", "npm:4.1.4"],
             ["koa-router", "npm:10.1.1"],
+            ["koa-session", "npm:6.2.0"],
             ["mysql", "npm:2.18.1"],
             ["nodemon", "npm:2.0.15"],
             ["passport-bnet", "npm:2.0.0"],
@@ -557,6 +559,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-koa-router-npm-7.4.4-ea72843f67-23ff5b725d.zip/node_modules/@types/koa-router/",
           "packageDependencies": [
             ["@types/koa-router", "npm:7.4.4"],
+            ["@types/koa", "npm:2.13.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/koa-session", [
+        ["npm:5.10.6", {
+          "packageLocation": "./.yarn/cache/@types-koa-session-npm-5.10.6-388586844f-61e3b74d51.zip/node_modules/@types/koa-session/",
+          "packageDependencies": [
+            ["@types/koa-session", "npm:5.10.6"],
+            ["@types/cookies", "npm:0.7.7"],
             ["@types/koa", "npm:2.13.4"]
           ],
           "linkType": "HARD",
@@ -1252,6 +1265,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["buffer", [
+        ["npm:5.7.1", {
+          "packageLocation": "./.yarn/cache/buffer-npm-5.7.1-513ef8259e-e2cf8429e1.zip/node_modules/buffer/",
+          "packageDependencies": [
+            ["buffer", "npm:5.7.1"],
+            ["base64-js", "npm:1.5.1"],
+            ["ieee754", "npm:1.2.1"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:6.0.3", {
           "packageLocation": "./.yarn/cache/buffer-npm-6.0.3-cd90dfedfe-5ad23293d9.zip/node_modules/buffer/",
           "packageDependencies": [
@@ -1699,6 +1721,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["crc", [
+        ["npm:3.8.0", {
+          "packageLocation": "./.yarn/cache/crc-npm-3.8.0-ff6ff34fbe-dabbc4eba2.zip/node_modules/crc/",
+          "packageDependencies": [
+            ["crc", "npm:3.8.0"],
+            ["buffer", "npm:5.7.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["create-require", [
         ["npm:1.1.1", {
           "packageLocation": "./.yarn/cache/create-require-npm-1.1.1-839884ca2e-a9a1503d43.zip/node_modules/create-require/",
@@ -1751,6 +1783,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/supports-color", null],
             ["ms", "npm:2.1.3"],
             ["supports-color", "npm:5.5.0"]
+          ],
+          "packagePeers": [
+            "@types/supports-color",
+            "supports-color"
+          ],
+          "linkType": "HARD",
+        }],
+        ["virtual:6156ebd03a91138fb718b5c622e9bec53a0d6544770dda77f36157330d665207aef430a7e777ec2fee78ad820507f86c32c59d623bc969397f208dea54aa58c1#npm:3.2.7", {
+          "packageLocation": "./.yarn/__virtual__/debug-virtual-6cee655fdf/0/cache/debug-npm-3.2.7-754e818c7a-b3d8c59407.zip/node_modules/debug/",
+          "packageDependencies": [
+            ["debug", "virtual:6156ebd03a91138fb718b5c622e9bec53a0d6544770dda77f36157330d665207aef430a7e777ec2fee78ad820507f86c32c59d623bc969397f208dea54aa58c1#npm:3.2.7"],
+            ["@types/supports-color", null],
+            ["ms", "npm:2.1.3"],
+            ["supports-color", null]
           ],
           "packagePeers": [
             "@types/supports-color",
@@ -3093,6 +3139,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["is-class-hotfix", [
+        ["npm:0.0.6", {
+          "packageLocation": "./.yarn/cache/is-class-hotfix-npm-0.0.6-0576f63809-7a0d5f14ef.zip/node_modules/is-class-hotfix/",
+          "packageDependencies": [
+            ["is-class-hotfix", "npm:0.0.6"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["is-core-module", [
         ["npm:2.8.1", {
           "packageLocation": "./.yarn/cache/is-core-module-npm-2.8.1-ce21740d1b-418b7bc107.zip/node_modules/is-core-module/",
@@ -3266,6 +3321,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["is-type-of", [
+        ["npm:1.2.1", {
+          "packageLocation": "./.yarn/cache/is-type-of-npm-1.2.1-09fa5c1b6f-b3c855bc5f.zip/node_modules/is-type-of/",
+          "packageDependencies": [
+            ["is-type-of", "npm:1.2.1"],
+            ["core-util-is", "npm:1.0.3"],
+            ["is-class-hotfix", "npm:0.0.6"],
+            ["isstream", "npm:0.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["is-typedarray", [
         ["npm:1.0.0", {
           "packageLocation": "./.yarn/cache/is-typedarray-npm-1.0.0-bbd99de5b6-3508c6cd0a.zip/node_modules/is-typedarray/",
@@ -3308,6 +3375,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/isexe-npm-2.0.0-b58870bd2e-26bf6c5480.zip/node_modules/isexe/",
           "packageDependencies": [
             ["isexe", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["isstream", [
+        ["npm:0.1.2", {
+          "packageLocation": "./.yarn/cache/isstream-npm-0.1.2-8581c75385-1eb2fe63a7.zip/node_modules/isstream/",
+          "packageDependencies": [
+            ["isstream", "npm:0.1.2"]
           ],
           "linkType": "HARD",
         }]
@@ -3559,6 +3635,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["koa-compose", "npm:4.1.0"],
             ["methods", "npm:1.1.2"],
             ["path-to-regexp", "npm:6.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["koa-session", [
+        ["npm:6.2.0", {
+          "packageLocation": "./.yarn/cache/koa-session-npm-6.2.0-6156ebd03a-bdaa96cb6f.zip/node_modules/koa-session/",
+          "packageDependencies": [
+            ["koa-session", "npm:6.2.0"],
+            ["crc", "npm:3.8.0"],
+            ["debug", "virtual:6156ebd03a91138fb718b5c622e9bec53a0d6544770dda77f36157330d665207aef430a7e777ec2fee78ad820507f86c32c59d623bc969397f208dea54aa58c1#npm:3.2.7"],
+            ["is-type-of", "npm:1.2.1"],
+            ["uuid", "npm:3.4.0"]
           ],
           "linkType": "HARD",
         }]
@@ -5780,6 +5869,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["uuid", [
+        ["npm:3.4.0", {
+          "packageLocation": "./.yarn/cache/uuid-npm-3.4.0-4fd8ef88ad-58de2feed6.zip/node_modules/uuid/",
+          "packageDependencies": [
+            ["uuid", "npm:3.4.0"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:8.3.2", {
           "packageLocation": "./.yarn/cache/uuid-npm-8.3.2-eca0baba53-5575a8a75c.zip/node_modules/uuid/",
           "packageDependencies": [
@@ -5870,6 +5966,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/koa-bodyparser", "npm:4.3.5"],
             ["@types/koa-passport", "npm:4.0.3"],
             ["@types/koa-router", "npm:7.4.4"],
+            ["@types/koa-session", "npm:5.10.6"],
             ["@types/mysql", "npm:2.15.20"],
             ["@types/node", "npm:16.11.22"],
             ["@types/passport-bnet", "npm:2.0.2"],
@@ -5885,6 +5982,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["koa-bodyparser", "npm:4.3.0"],
             ["koa-passport", "npm:4.1.4"],
             ["koa-router", "npm:10.1.1"],
+            ["koa-session", "npm:6.2.0"],
             ["mysql", "npm:2.18.1"],
             ["nodemon", "npm:2.0.15"],
             ["passport-bnet", "npm:2.0.0"],

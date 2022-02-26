@@ -1,24 +1,31 @@
 import passport from 'koa-passport';
 import BnetStrategy from 'passport-bnet';
 import { createConnection } from 'typeorm';
-import { Container, Token } from 'typedi';
 
-const BNET = new Token<{ id: number; battletag: string; token: string }>('BNET');
-
-const oAuth = passport.use(
+passport.use(
   new BnetStrategy(
     {
       clientID: process.env.WOW_BNET_ID ?? '',
       clientSecret: process.env.WOW_BNET_SECRET ?? '',
-      callbackURL: 'http://localhost:4000/api/auth',
+      callbackURL: '/api/auth/callback',
       region: 'kr',
     },
     (accessToken, refreshToken, profile, done) => {
-      Container.set(BNET, profile);
       return done(null, profile);
     },
   ),
 );
+
+passport.serializeUser((user, done) => {
+  // @ts-ignore
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  // TODO: findById
+  // @ts-expect-error
+  done(null, id);
+});
 
 const dbConnection = {
   host: process.env.WOW_DB_HOST,
@@ -44,4 +51,4 @@ const initialize = async () => {
   }
 };
 
-export { BNET, oAuth, dbConnection, initialize };
+export { dbConnection, initialize };

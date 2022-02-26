@@ -1,10 +1,11 @@
 import 'reflect-metadata';
 import Koa from 'koa';
 import cors from '@koa/cors';
+import session from 'koa-session';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
-import { authMiddleware, userMiddleware, typediMiddleware } from './middleware';
+import { typediMiddleware } from './middleware';
 import api from './api/routes/index';
 import { initialize } from './shared/config';
 
@@ -19,12 +20,13 @@ router.get('/ping', (ctx) => {
 
 initialize(); // NOTE: create a db connection
 
+app.keys = ['fastfive'];
+
 app
-  .use(cors())
+  .use(session({ key: 'tracker', maxAge: 60 * 60 }, app))
+  .use(cors({ origin: 'http://localhost:3000', credentials: true }))
   .use(bodyParser())
   .use(typediMiddleware)
-  // .use(authMiddleware) // FIXME: Temp
-  .use(userMiddleware)
   .use(passport.initialize())
   .use(passport.session())
   .use(router.routes())
