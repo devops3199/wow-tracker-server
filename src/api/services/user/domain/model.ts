@@ -1,6 +1,7 @@
-import { Entity, PrimaryColumn, CreateDateColumn, Column } from 'typeorm';
+import { Entity, Unique, PrimaryColumn, CreateDateColumn, UpdateDateColumn, Column } from 'typeorm';
 
 @Entity()
+@Unique(['id'])
 export class User {
   @PrimaryColumn()
   id!: number;
@@ -13,6 +14,9 @@ export class User {
 
   @CreateDateColumn()
   createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 
   constructor(args: { id: number; token: string; battleTag: string }) {
     if (args) {

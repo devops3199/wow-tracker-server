@@ -1,6 +1,8 @@
 import passport from 'koa-passport';
 import BnetStrategy from 'passport-bnet';
 import { createConnection } from 'typeorm';
+import { User } from '../api/services/user/domain/model';
+import { UserService } from '../api/services/user/application/service';
 
 passport.use(
   new BnetStrategy(
@@ -10,7 +12,9 @@ passport.use(
       callbackURL: '/api/auth/callback',
       region: 'kr',
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
+      const service = new UserService();
+      await service.register(new User({ id: profile.id, token: profile.token, battleTag: profile.battletag }));
       return done(null, profile);
     },
   ),
@@ -21,10 +25,15 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  // TODO: findById
-  // @ts-expect-error
-  done(null, id);
+passport.deserializeUser(async (id: number, done) => {
+  const service = new UserService();
+  const user = await service.getUser(id);
+
+  if (!user) {
+    throw Error();
+  }
+
+  done(null, user);
 });
 
 const dbConnection = {
