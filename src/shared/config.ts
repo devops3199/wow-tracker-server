@@ -4,13 +4,17 @@ import { createConnection } from 'typeorm';
 import { User } from '../api/services/user/domain/model';
 import { UserService } from '../api/services/user/application/service';
 
+const CLIENT_URL = 'http://localhost:3000';
+const BNET_URL = 'https://kr.api.blizzard.com';
+
 passport.use(
   new BnetStrategy(
     {
-      clientID: process.env.WOW_BNET_ID ?? '',
-      clientSecret: process.env.WOW_BNET_SECRET ?? '',
+      clientID: process.env.WOW_BNET_ID!,
+      clientSecret: process.env.WOW_BNET_SECRET!,
       callbackURL: '/api/auth/callback',
       region: 'kr',
+      scope: 'wow.profile',
     },
     async (accessToken, refreshToken, profile, done) => {
       const service = new UserService();
@@ -60,4 +64,4 @@ const initialize = async () => {
   }
 };
 
-export { dbConnection, initialize };
+export { dbConnection, initialize, CLIENT_URL, BNET_URL };

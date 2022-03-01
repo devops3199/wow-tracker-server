@@ -7,7 +7,7 @@ import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
 import { typediMiddleware } from './middleware';
 import api from './api/routes/index';
-import { initialize } from './shared/config';
+import { initialize, CLIENT_URL } from './shared/config';
 
 const app = new Koa();
 const router = new Router();
@@ -23,8 +23,8 @@ initialize(); // NOTE: create a db connection
 app.keys = ['fastfive'];
 
 app
-  .use(session({ key: 'tracker', maxAge: 60 * 60 }, app))
-  .use(cors({ origin: 'http://localhost:3000', credentials: true }))
+  .use(session({ key: 'tracker', maxAge: 60 * 60 * 1000 }, app))
+  .use(cors({ origin: CLIENT_URL, credentials: true }))
   .use(bodyParser())
   .use(typediMiddleware)
   .use(passport.initialize())
