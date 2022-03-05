@@ -10,6 +10,7 @@ bnet.get('/profile', async (ctx, next) => {
   if (!user) {
     ctx.status = 403;
     ctx.body = 'Invalid session';
+    return;
   }
 
   http.setAuthorization(`Bearer ${user.token}`);
@@ -28,6 +29,7 @@ bnet.get('/realms', async (ctx, next) => {
   if (!user) {
     ctx.status = 403;
     ctx.body = 'Invalid session';
+    return;
   }
 
   http.setAuthorization(`Bearer ${user.token}`);
