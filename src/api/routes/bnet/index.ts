@@ -7,11 +7,13 @@ bnet.get('/profile', async (ctx, next) => {
   // @ts-ignore
   const user = ctx.req.user;
   if (user) {
-    const result = await http.get('/profile/user/wow', {
-      headers: { authorization: `Bearer ${user.token}`, 'Battlenet-Namespace': 'profile-kr', locale: 'ko_KR' },
-    });
+    http.setAuthorization(`Bearer ${user.token}`);
+    http.setBattlenetNamespace('profile-kr');
+
+    const result = await http.get('/profile/user/wow');
+
     ctx.status = 200;
-    ctx.body = { data: result.data };
+    ctx.body = { data: result };
   } else {
     ctx.status = 403;
     ctx.body = 'Invalid session';
@@ -23,24 +25,18 @@ bnet.get('/realms', async (ctx, next) => {
   const user = ctx.req.user;
 
   if (user) {
-    // FIXME: 더럽다
+    http.setAuthorization(`Bearer ${user.token}`);
+    http.setBattlenetNamespace('dynamic-kr');
+
     const result = await Promise.all([
-      http.get('/data/wow/connected-realm/205', {
-        headers: { authorization: `Bearer ${user.token}`, 'Battlenet-Namespace': 'dynamic-kr', locale: 'ko_KR' },
-      }),
-      http.get('/data/wow/connected-realm/210', {
-        headers: { authorization: `Bearer ${user.token}`, 'Battlenet-Namespace': 'dynamic-kr', locale: 'ko_KR' },
-      }),
-      http.get('/data/wow/connected-realm/214', {
-        headers: { authorization: `Bearer ${user.token}`, 'Battlenet-Namespace': 'dynamic-kr', locale: 'ko_KR' },
-      }),
-      http.get('/data/wow/connected-realm/2116', {
-        headers: { authorization: `Bearer ${user.token}`, 'Battlenet-Namespace': 'dynamic-kr', locale: 'ko_KR' },
-      }),
+      http.get('/data/wow/connected-realm/205'),
+      http.get('/data/wow/connected-realm/210'),
+      http.get('/data/wow/connected-realm/214'),
+      http.get('/data/wow/connected-realm/2116'),
     ]);
 
     ctx.status = 200;
-    ctx.body = { data: result.map((promise) => promise.data) };
+    ctx.body = { data: result };
   } else {
     ctx.status = 403;
     ctx.body = 'Invalid session';
