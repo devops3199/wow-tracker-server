@@ -98,5 +98,5 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": ["./"],
-  "exclude": ["node_modules"]
+  "exclude": [".yarn", ".vscode", "./src/.pnp.cjs", "./src/.pnp.loader.mjs"]
 }
