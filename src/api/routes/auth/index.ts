@@ -25,4 +25,10 @@ auth.get('/failure', async (ctx, next) => {
   ctx.body = 'Unauthorized';
 });
 
+auth.post('/logout', async (ctx, next) => {
+  await ctx.logout();
+  ctx.session = null;
+  ctx.status = 200;
+});
+
 export default auth;
